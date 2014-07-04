@@ -1,0 +1,354 @@
+package fdi.ucm.server.importparser.chasqui.coleccion.categoria.virtualobject;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import fdi.ucm.server.importparser.chasqui.LoadCollectionChasqui;
+import fdi.ucm.server.importparser.chasqui.NameConstantsChasqui;
+import fdi.ucm.server.importparser.chasqui.InterfaceChasquiparser;
+import fdi.ucm.server.importparser.chasqui.coleccion.categoria.Grammar_File;
+import fdi.ucm.server.modelComplete.collection.document.CompleteDocuments;
+import fdi.ucm.server.modelComplete.collection.document.CompleteLinkElement;
+import fdi.ucm.server.modelComplete.collection.document.CompleteOperationalValue;
+import fdi.ucm.server.modelComplete.collection.document.CompleteTextElement;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteIterator;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteLinkElementType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteStructure;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
+
+/**
+ * Clase que implementa la referencia.
+ * @author Joaquin Gayoso-Cabada
+ *
+ */
+public class ElementType_Resources implements InterfaceChasquiparser {
+	
+	private CompleteIterator metaPadre;
+	private CompleteLinkElementType Attributo;
+	private CompleteTextElementType Descripcion;
+	private CompleteTextElementType DisplayNeme;
+	private CompleteTextElementType OldSystemID;
+	private CompleteTextElementType TypoString;
+	private CompleteTextElementType TypoRecString;
+	private CompleteOperationalValueType VisibleDesc;
+	private CompleteOperationalValueType VisibleDisp;
+	private CompleteOperationalValueType VisibleIDname;
+	private CompleteOperationalValueType VisibleAtt;
+	private CompleteOperationalValueType VisibleTypoString;
+	private CompleteOperationalValueType VisibleTypoRecString;
+	private LoadCollectionChasqui LCole;
+	private static final String CATEGORIAS_VACIAS = " Existen filas con categorias vacias";
+
+
+
+	public ElementType_Resources(CompleteStructure meta,LoadCollectionChasqui lcole) {
+		LCole=lcole;
+		metaPadre=(CompleteIterator) meta;
+	}
+
+
+	@Override
+	public void ProcessAttributes() {
+		{
+			Attributo = new CompleteLinkElementType(NameConstantsChasqui.RESOURCENAME,metaPadre);		
+			
+			CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+			
+			VisibleAtt=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
+			CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
+			CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
+			
+			VistaOV.getValues().add(VisibleAtt);
+			VistaOV.getValues().add(Valor2);
+			VistaOV.getValues().add(Valor3);
+			
+			CompleteOperationalView VistaOVMeta=new CompleteOperationalView(NameConstantsChasqui.META);
+			CompleteOperationalValueType ValorMeta=new CompleteOperationalValueType(NameConstantsChasqui.TYPE,NameConstantsChasqui.RESOURCE,VistaOVMeta);
+			VistaOVMeta.getValues().add(ValorMeta);
+			
+			Attributo.getShows().add(VistaOVMeta);
+			Attributo.getShows().add(VistaOV);
+		}
+
+		{
+			Descripcion = new CompleteTextElementType(NameConstantsChasqui.DESCRIPTIONNAME,Attributo);
+			Attributo.getSons().add(Descripcion);
+			
+			CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+			
+			VisibleDesc=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
+			CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
+			CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
+			
+			VistaOV.getValues().add(VisibleDesc);
+			VistaOV.getValues().add(Valor2);
+			VistaOV.getValues().add(Valor3);
+			Descripcion.getShows().add(VistaOV);
+			
+			 CompleteOperationalView VistaMetaType=new CompleteOperationalView(NameConstantsChasqui.METATYPE);
+			 CompleteOperationalValueType MetaType=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.TEXT,VistaMetaType);
+			 VistaMetaType.getValues().add(MetaType);
+			 Descripcion.getShows().add(VistaMetaType);
+		}
+
+		{
+			DisplayNeme = new CompleteTextElementType(NameConstantsChasqui.DISPLAY_NAMENAME,Attributo);
+			Attributo.getSons().add(DisplayNeme);
+			
+			CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+			
+			VisibleDisp=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
+			CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
+			CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
+			
+			VistaOV.getValues().add(VisibleDisp);
+			VistaOV.getValues().add(Valor2);
+			VistaOV.getValues().add(Valor3);
+			DisplayNeme.getShows().add(VistaOV);
+			
+			 CompleteOperationalView VistaMetaType=new CompleteOperationalView(NameConstantsChasqui.METATYPE);
+			 CompleteOperationalValueType MetaType=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.TEXT,VistaMetaType);
+			 VistaMetaType.getValues().add(MetaType);
+			 DisplayNeme.getShows().add(VistaMetaType);
+		}
+
+
+		{
+			OldSystemID = new CompleteTextElementType(NameConstantsChasqui.IDNAME, Attributo);
+			Attributo.getSons().add(OldSystemID);
+
+			CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+			
+			VisibleIDname=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
+			CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
+			CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
+			
+			VistaOV.getValues().add(VisibleIDname);
+			VistaOV.getValues().add(Valor2);
+			VistaOV.getValues().add(Valor3);
+			OldSystemID.getShows().add(VistaOV);
+			
+			
+			 CompleteOperationalView VistaOV2=new CompleteOperationalView(NameConstantsChasqui.METATYPE);
+			 CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.NUMERIC,VistaOV2);
+			 VistaOV2.getValues().add(Valor);
+			 OldSystemID.getShows().add(VistaOV2);
+		}
+
+		ElementType_Resources_Type ATTM = new ElementType_Resources_Type(
+				NameConstantsChasqui.TYPE_FILENAME, false, Attributo,LCole);
+		ATTM.ProcessAttributes();
+		
+		{
+			
+		TypoString = ATTM.getExtendMetaControlled();
+		Attributo.getSons().add(TypoString);
+		
+		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+		
+		VisibleTypoString=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(false),VistaOV);
+		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
+		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
+		
+		VistaOV.getValues().add(VisibleTypoString);
+		VistaOV.getValues().add(Valor2);
+		VistaOV.getValues().add(Valor3);
+		TypoString.getShows().add(VistaOV);
+		}
+		
+		ElementType_Resources_TypeRec ATTM2 = new ElementType_Resources_TypeRec(
+				NameConstantsChasqui.TYPE_FILE_RECNAME, false, Attributo,LCole);
+		ATTM2.ProcessAttributes();
+		
+		{
+		TypoRecString = ATTM2.getExtendMetaControlled();
+		Attributo.getSons().add(TypoRecString);
+		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+		
+		VisibleTypoRecString=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(false),VistaOV);
+		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
+		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
+		
+		VistaOV.getValues().add(VisibleTypoRecString);
+		VistaOV.getValues().add(Valor2);
+		VistaOV.getValues().add(Valor3);
+		TypoRecString.getShows().add(VistaOV);
+		
+		}
+		
+
+	}
+
+	@Override
+	public void ProcessInstances() {
+		try {
+			ResultSet rs=LCole.getSQL().RunQuerrySELECT("SELECT * FROM recursos ORDER BY idov;");
+			if (rs!=null) 
+			{
+				Integer preIdov=null;
+				int MaxCount=0;
+				int count=1;
+				while (rs.next()) {
+					
+					String IdS=rs.getObject("id").toString();
+					String Padre=rs.getObject("idov").toString();
+					String Nombre=rs.getObject("nom_rec").toString();
+					Object nulable = rs.getObject("descripcion");
+					String ruta=rs.getObject("ruta").toString();
+					String Descripcion="";
+					if (nulable!=null)
+						Descripcion=nulable.toString();
+					Object nulable2 = rs.getObject("nom_rec_publico");
+					String displayName=Nombre;
+					if (nulable2!=null)
+						displayName=nulable2.toString();
+					Object nulable3 = rs.getObject("visible");
+					String visible="NO";
+					if (nulable3!=null)
+						visible=nulable3.toString();
+					String IdovRef=ruta.substring(0, ruta.length()-1);
+					//
+					Object typonull = rs.getObject("tipo");
+					String typoString="";
+					if (typonull!=null)
+						typoString=typonull.toString();
+					//
+					Object typoRec = rs.getObject("tipoRec");
+					String typoRecString="";
+					if (typoRec!=null)
+						typoRecString=typoRec.toString();
+					
+					if (Padre!=null&&!Padre.isEmpty()&&Nombre!=null&&!Nombre.isEmpty()&&IdovRef!=null)
+						{
+						Integer Idov = Integer.parseInt(Padre);	
+						if (preIdov!=null&&preIdov.intValue()==Idov.intValue())
+							count++;
+						else
+							{
+							if (count>MaxCount)
+								MaxCount=count;
+							preIdov=Idov;
+							count=1;
+							}
+						
+						boolean visiblebol;
+						if (visible.toLowerCase().equals("SI".toLowerCase()))
+							visiblebol=true;
+					else visiblebol=false;
+						if (displayName.isEmpty()) displayName=Nombre;
+							
+						CompleteDocuments R=LCole.getCollection().getObjetoVirtual().get(Idov);
+						
+						
+						CompleteDocuments EFV;
+						if (typoString.equals("OV"))
+									{
+									Integer Idovrefe = Integer.parseInt(IdovRef);
+									EFV=LCole.getCollection().getObjetoVirtual().get(Idovrefe);	
+									}
+						else
+							if (IdovRef.isEmpty())
+							{
+								CompleteDocuments EFVF=LCole.getCollection().getFilesC().get(Idov+"/"+Nombre.toLowerCase());
+							 	CompleteLinkElement AtributoBaseRelacion = new CompleteLinkElement(Grammar_File.getIdovOwner(), R);
+							 	EFVF.getDescription().add(AtributoBaseRelacion);
+							 	EFV=EFVF;
+							}
+							else
+								EFV=LCole.getCollection().getFilesC().get(IdovRef+"/"+Nombre.toLowerCase());
+								
+						
+						
+							
+						{
+							CompleteLinkElement AtributoBaseRelacion2 = new CompleteLinkElement(Attributo, EFV);
+						AtributoBaseRelacion2.getAmbitos().add(count);
+						R.getDescription().add(AtributoBaseRelacion2);
+
+						CompleteOperationalValue Valor=new CompleteOperationalValue(VisibleAtt,Boolean.toString(visiblebol));
+
+						AtributoBaseRelacion2.getShows().add(Valor);
+						}
+						
+						if (!Descripcion.trim().isEmpty()) {
+							CompleteTextElement DescripcionTexto = new CompleteTextElement(this.Descripcion,Descripcion);
+							DescripcionTexto.getAmbitos().add(count);
+							R.getDescription().add(DescripcionTexto);
+							
+							CompleteOperationalValue Valor=new CompleteOperationalValue(VisibleDesc,Boolean.toString(visiblebol));
+
+							DescripcionTexto.getShows().add(Valor);
+							
+						}
+						
+						{
+						CompleteTextElement NombreEnPantalla = new CompleteTextElement(this.DisplayNeme,displayName);
+						NombreEnPantalla.getAmbitos().add(count);
+						R.getDescription().add(NombreEnPantalla);
+						
+						CompleteOperationalValue Valor=new CompleteOperationalValue(VisibleDisp,Boolean.toString(visiblebol));
+
+						NombreEnPantalla.getShows().add(Valor);
+						}
+
+						
+							
+						{
+						CompleteTextElement IdEnViejoSistema = new CompleteTextElement(this.OldSystemID,IdS);
+						IdEnViejoSistema.getAmbitos().add(count);
+						R.getDescription().add(IdEnViejoSistema);
+						
+						CompleteOperationalValue Valor=new CompleteOperationalValue(VisibleIDname,Boolean.toString(visiblebol));
+
+						IdEnViejoSistema.getShows().add(Valor);
+						}
+						
+						if (!typoString.isEmpty()) {
+							CompleteTextElement TypoRecurso = new CompleteTextElement(this.TypoString,typoString);
+							TypoRecurso.getAmbitos().add(count);
+							R.getDescription().add(TypoRecurso);
+							CompleteOperationalValue Valor=new CompleteOperationalValue(VisibleTypoString,Boolean.toString(visiblebol));
+							TypoRecurso.getShows().add(Valor);
+						}
+						
+						if (!typoRecString.isEmpty()) {
+							CompleteTextElement TypoRecurso2 = new CompleteTextElement(this.TypoRecString,typoRecString);
+							TypoRecurso2.getAmbitos().add(count);
+							R.getDescription().add(TypoRecurso2);
+							CompleteOperationalValue Valor=new CompleteOperationalValue(VisibleTypoRecString,Boolean.toString(visiblebol));
+							TypoRecurso2.getShows().add(Valor);
+						}
+						
+
+						}
+					else System.err.println(CATEGORIAS_VACIAS);
+
+				}
+			rs.close();
+			metaPadre.setAmbitoSTotales(MaxCount);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	/**
+	 * @return the attributo
+	 */
+	public CompleteLinkElementType getAttributo() {
+		return Attributo;
+	}
+
+	/**
+	 * @param attributo the attributo to set
+	 */
+	public void setAttributo(CompleteLinkElementType attributo) {
+		Attributo = attributo;
+	}
+
+	
+	
+}

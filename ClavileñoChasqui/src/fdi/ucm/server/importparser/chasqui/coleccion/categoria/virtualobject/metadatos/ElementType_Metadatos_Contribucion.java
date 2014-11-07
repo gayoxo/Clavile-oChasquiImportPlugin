@@ -2,6 +2,7 @@ package fdi.ucm.server.importparser.chasqui.coleccion.categoria.virtualobject.me
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -187,7 +188,9 @@ public class ElementType_Metadatos_Contribucion implements InterfaceChasquiparse
 							if (!contenido.isEmpty())
 								{
 								Date D= formatter.parse(contenido);
-								CompleteTextElement EMTV=new CompleteTextElement(padre.getAMFecha(), D.toString());
+								DateFormat df = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+								String valueE=df.format(D.toString());
+								CompleteTextElement EMTV=new CompleteTextElement(padre.getAMFecha(), valueE);
 								EMTV.getAmbitos().add(context);
 								CompleteDocuments OV=LCole.getCollection().getObjetoVirtual().get(idovInt);
 								OV.getDescription().add(EMTV);

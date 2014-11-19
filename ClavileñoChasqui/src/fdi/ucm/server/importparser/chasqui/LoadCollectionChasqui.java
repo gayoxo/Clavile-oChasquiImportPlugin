@@ -54,12 +54,12 @@ public class LoadCollectionChasqui extends LoadCollection{
 		if (Parametros==null)
 		{
 			ArrayList<ImportExportPair> ListaCampos=new ArrayList<ImportExportPair>();
-			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.Text, "Server"));
-			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.Text, "Database"));
-			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.Number, "Port"));
-			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.Text, "User"));
-			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.EncriptedText, "Password"));
-			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.Text, "Base url for files (if need it)",true));
+			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.Text, "MySQL Server Direction"));
+			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.Text, "MySQL Chasqui Database Name"));
+			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.Number, "MySQL Port"));
+			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.Text, "MySQL User"));
+			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.EncriptedText, "MySQL Password"));
+			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.Text, "URL Chasqui Base url for files (if need it)",true));
 			ListaCampos.add(new ImportExportPair(ImportExportDataEnum.Boolean, "Clone local files",true));
 			Parametros=ListaCampos;
 			return ListaCampos;

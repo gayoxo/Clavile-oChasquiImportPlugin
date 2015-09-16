@@ -12,7 +12,6 @@ import fdi.ucm.server.modelComplete.collection.document.CompleteDocuments;
 import fdi.ucm.server.modelComplete.collection.document.CompleteTextElement;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 /**
@@ -40,22 +39,20 @@ public class ElementType_Texto  implements InterfaceChasquiparser  {
 		atributoTexto=new CompleteTextElementType(name,father);
 		LCole=lcole;
 		
-		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(browseable),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		VistaOV.getValues().add(Valor);
-		VistaOV.getValues().add(Valor2);
-		VistaOV.getValues().add(Valor3);
+		atributoTexto.getShows().add(Valor);
+		atributoTexto.getShows().add(Valor2);
+		atributoTexto.getShows().add(Valor3);
 		
-		atributoTexto.getShows().add(VistaOV);
 		
-		CompleteOperationalView VistaMetaType=new CompleteOperationalView(NameConstantsChasqui.METATYPE);
+		String VistaMetaType=new String(NameConstantsChasqui.METATYPE);
 		CompleteOperationalValueType MetaType=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.CONTROLED,VistaMetaType);
-		VistaMetaType.getValues().add(MetaType);
-		atributoTexto.getShows().add(VistaMetaType);
+		atributoTexto.getShows().add(MetaType);
 		
 		Vocabulario= new ArrayList<String>();
 		LCole.getCollection().getVocabularios().put(atributoTexto, Vocabulario);
@@ -73,22 +70,21 @@ public class ElementType_Texto  implements InterfaceChasquiparser  {
 			boolean browseable, CompleteElementType father,ArrayList<String> vocabulary,LoadCollectionChasqui lcole) {
 		atributoTexto=new CompleteTextElementType(name,father);
 		LCole=lcole;
-		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(browseable),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		VistaOV.getValues().add(Valor);
-		VistaOV.getValues().add(Valor2);
-		VistaOV.getValues().add(Valor3);
+		atributoTexto.getShows().add(Valor);
+		atributoTexto.getShows().add(Valor2);
+		atributoTexto.getShows().add(Valor3);
 		
-		atributoTexto.getShows().add(VistaOV);
 		
-		CompleteOperationalView VistaMetaType=new CompleteOperationalView(NameConstantsChasqui.METATYPE);
+		String VistaMetaType=new String(NameConstantsChasqui.METATYPE);
 		CompleteOperationalValueType MetaType=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.CONTROLED,VistaMetaType);
-		VistaMetaType.getValues().add(MetaType);
-		atributoTexto.getShows().add(VistaMetaType);
+		atributoTexto.getShows().add(MetaType);
+
 		
 		Vocabulario= vocabulary;
 		

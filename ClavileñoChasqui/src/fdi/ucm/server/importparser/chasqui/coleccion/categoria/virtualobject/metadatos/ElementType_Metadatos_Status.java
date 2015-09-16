@@ -12,7 +12,6 @@ import fdi.ucm.server.modelComplete.collection.document.CompleteDocuments;
 import fdi.ucm.server.modelComplete.collection.document.CompleteTextElement;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 
@@ -40,21 +39,19 @@ public class ElementType_Metadatos_Status implements InterfaceChasquiparser{
 		LCole=lcole;
 		atributosmetadatosstatus=new CompleteTextElementType(name, father);
 		
-		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(browseable),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		VistaOV.getValues().add(Valor);
-		VistaOV.getValues().add(Valor2);
-		VistaOV.getValues().add(Valor3);
-		atributosmetadatosstatus.getShows().add(VistaOV);
+		atributosmetadatosstatus.getShows().add(Valor);
+		atributosmetadatosstatus.getShows().add(Valor2);
+		atributosmetadatosstatus.getShows().add(Valor3);
 		
-		CompleteOperationalView VistaMetaType=new CompleteOperationalView(NameConstantsChasqui.METATYPE);
+		String VistaMetaType=new String(NameConstantsChasqui.METATYPE);
 		CompleteOperationalValueType MetaType=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.CONTROLED,VistaMetaType);
-		VistaMetaType.getValues().add(MetaType);
-		atributosmetadatosstatus.getShows().add(VistaMetaType);
+		atributosmetadatosstatus.getShows().add(MetaType);
 		
 		Vocabulario= new ArrayList<String>();
 		LCole.getCollection().getVocabularios().put(atributosmetadatosstatus, Vocabulario);

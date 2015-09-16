@@ -17,7 +17,6 @@ import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteGrammar;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteIterator;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 import java.sql.ResultSet;
@@ -85,26 +84,25 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 		CompleteGrammar Vocabulary = new CompleteGrammar(NameConstantsChasqui.VOCABULARY, NameConstantsChasqui.VOCABULARY,chasqui);
 		chasqui.getMetamodelGrammar().add(Vocabulary);
 		{
-		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor = new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(false),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		VistaOV.getValues().add(Valor);
-		VistaOV.getValues().add(Valor2);
-		VistaOV.getValues().add(Valor3);
+		Vocabulary.getViews().add(Valor);
+		Vocabulary.getViews().add(Valor2);
+		Vocabulary.getViews().add(Valor3);
 		
 
-		CompleteOperationalView VistaOVMeta=new CompleteOperationalView(NameConstantsChasqui.META);
+		String VistaOVMeta=new String(NameConstantsChasqui.META);
 		
 		CompleteOperationalValueType ValorMeta=new CompleteOperationalValueType(NameConstantsChasqui.TYPE,NameConstantsChasqui.VOCABULARY,VistaOVMeta);
 		
-		VistaOVMeta.getValues().add(ValorMeta);
+		Vocabulary.getViews().add(ValorMeta);
 		
 		
-		Vocabulary.getViews().add(VistaOV);
-		Vocabulary.getViews().add(VistaOVMeta);
+
 		}
 		
 		CompleteTextElementType Number=new CompleteTextElementType(NameConstantsChasqui.VOCNUMBER, Vocabulary);
@@ -117,26 +115,25 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 		
 		
 		{
-		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+			String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor = new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(false),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		VistaOV.getValues().add(Valor);
-		VistaOV.getValues().add(Valor2);
-		VistaOV.getValues().add(Valor3);
+		Number.getShows().add(Valor);
+		Number.getShows().add(Valor2);
+		Number.getShows().add(Valor3);
 		
 
-		CompleteOperationalView VistaOVMeta=new CompleteOperationalView(NameConstantsChasqui.META);
+		String VistaOVMeta=new String(NameConstantsChasqui.META);
 		
 		CompleteOperationalValueType ValorMeta=new CompleteOperationalValueType(NameConstantsChasqui.TYPE,NameConstantsChasqui.VOCNUMBER,VistaOVMeta);
 		
-		VistaOVMeta.getValues().add(ValorMeta);
+		Number.getShows().add(ValorMeta);
 		
 		
-		Number.getShows().add(VistaOV);
-		Number.getShows().add(VistaOVMeta);
+		
 		}
 		
 		
@@ -144,26 +141,24 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 		IteraValor.getSons().add(Values);
 		
 		{
-		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor = new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(false),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		VistaOV.getValues().add(Valor);
-		VistaOV.getValues().add(Valor2);
-		VistaOV.getValues().add(Valor3);
+		Values.getShows().add(Valor);
+		Values.getShows().add(Valor2);
+		Values.getShows().add(Valor3);
 		
 
-		CompleteOperationalView VistaOVMeta=new CompleteOperationalView(NameConstantsChasqui.META);
+		String VistaOVMeta=new String(NameConstantsChasqui.META);
 		
 		CompleteOperationalValueType ValorMeta=new CompleteOperationalValueType(NameConstantsChasqui.TYPE,NameConstantsChasqui.TERM,VistaOVMeta);
 		
-		VistaOVMeta.getValues().add(ValorMeta);
+		Values.getShows().add(ValorMeta);
 		
 		
-		Values.getShows().add(VistaOV);
-		Values.getShows().add(VistaOVMeta);
 		}
 		
 		
@@ -176,7 +171,7 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 				ArrayList<String> voc = iterable_element.getValue();
 				
 				
-				CompleteOperationalView VistaVOC=new CompleteOperationalView(NameConstantsChasqui.VOCABULARY);
+				String VistaVOC=new String(NameConstantsChasqui.VOCABULARY);
 				
 				Integer I=procesados.get(voc);
 				if (I==null)
@@ -201,11 +196,10 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 				
 				
 				CompleteOperationalValueType ValorComp=new CompleteOperationalValueType(NameConstantsChasqui.VOCNUMBER,Integer.toString(I.intValue()),VistaVOC);
-				VistaVOC.getValues().add(ValorComp);
+				element.getShows().add(ValorComp);
 				
 				
-				
-				element.getShows().add(VistaVOC);
+			
 			}
 	}
 
@@ -240,23 +234,21 @@ private void process_Atributos() {
 	private void process_atributos_datos() {
 		CompleteElementType AtributosMeta=new CompleteElementType(NameConstantsChasqui.DATOSNAME,ObjetoDigitalMeta.getMeta());
 		
-		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor = new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		VistaOV.getValues().add(Valor);
-		VistaOV.getValues().add(Valor2);
-		VistaOV.getValues().add(Valor3);
+		AtributosMeta.getShows().add(Valor);
+		AtributosMeta.getShows().add(Valor2);
+		AtributosMeta.getShows().add(Valor3);
 		
-		CompleteOperationalView VistaOVMeta=new CompleteOperationalView(NameConstantsChasqui.META);
+		String VistaOVMeta=new String(NameConstantsChasqui.META);
 		CompleteOperationalValueType ValorMeta=new CompleteOperationalValueType(NameConstantsChasqui.TYPE,NameConstantsChasqui.DATOS,VistaOVMeta);
-		VistaOVMeta.getValues().add(ValorMeta);
+		AtributosMeta.getShows().add(ValorMeta);
 		
-		AtributosMeta.getShows().add(VistaOVMeta);
-		
-		AtributosMeta.getShows().add(VistaOV);
+
 		ObjetoDigitalMeta.getMeta().getSons().add(AtributosMeta);
 //		ChasquiStaticFunctions.addMeta(ObjetoDigitalMeta.getMeta(),AtributosMeta);
 //		chasqui.getMetamodelSchemas().add(AtributosMeta);

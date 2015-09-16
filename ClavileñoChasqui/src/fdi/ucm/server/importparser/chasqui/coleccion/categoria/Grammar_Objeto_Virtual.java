@@ -18,7 +18,6 @@ import fdi.ucm.server.modelComplete.collection.document.CompleteTextElement;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteGrammar;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteIterator;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 
 /**
  * Clase que implementa la creacion de la seccion de objetos virtuales
@@ -41,36 +40,34 @@ public class Grammar_Objeto_Virtual implements InterfaceChasquiparser{
 		LCole=lcole;
 		ObjetoVirtual=new HashMap<Integer, CompleteDocuments>();
 		MetaAtt=new CompleteGrammar(NameConstantsChasqui.VIRTUAL_OBJECTNAME, NameConstantsChasqui.VIRTUAL_OBJECTNAME,Padre);
-		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor = new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		VistaOV.getValues().add(Valor);
-		VistaOV.getValues().add(Valor2);
-		VistaOV.getValues().add(Valor3);
+		MetaAtt.getViews().add(Valor);
+		MetaAtt.getViews().add(Valor2);
+		MetaAtt.getViews().add(Valor3);
 		
 
-		CompleteOperationalView VistaOVMeta=new CompleteOperationalView(NameConstantsChasqui.META);
+		String VistaOVMeta=new String(NameConstantsChasqui.META);
 		
 		CompleteOperationalValueType ValorMeta=new CompleteOperationalValueType(NameConstantsChasqui.TYPE,NameConstantsChasqui.VIRTUAL_OBJECT,VistaOVMeta);
 		
-		VistaOVMeta.getValues().add(ValorMeta);
+		MetaAtt.getViews().add(ValorMeta);
 		
 		
-		CompleteOperationalView VistaOVOda=new CompleteOperationalView(NameConstantsChasqui.ODA);
+		String VistaOVOda=new String(NameConstantsChasqui.ODA);
 		
 		CompleteOperationalValueType ValorOda=new CompleteOperationalValueType(NameConstantsChasqui.PUBLIC,Boolean.toString(true),VistaOVOda);
 
 		CompleteOperationalValueType ValorOda2=new CompleteOperationalValueType(NameConstantsChasqui.PRIVATE,Boolean.toString(false),VistaOVOda);
 
-		VistaOVOda.getValues().add(ValorOda);
-		VistaOVOda.getValues().add(ValorOda2);
+		MetaAtt.getViews().add(ValorOda);
+		MetaAtt.getViews().add(ValorOda2);
 		
-		MetaAtt.getViews().add(VistaOV);
-		MetaAtt.getViews().add(VistaOVMeta);
-		MetaAtt.getViews().add(VistaOVOda);
+		
 	}
 	
 	@Override

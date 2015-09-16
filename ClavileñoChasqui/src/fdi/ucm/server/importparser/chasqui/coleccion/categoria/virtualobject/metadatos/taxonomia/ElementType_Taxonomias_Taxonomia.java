@@ -12,7 +12,6 @@ import fdi.ucm.server.importparser.chasqui.StaticFunctionsChasqui;
 import fdi.ucm.server.importparser.chasqui.InterfaceChasquiparser;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 /**
@@ -40,17 +39,16 @@ public class ElementType_Taxonomias_Taxonomia implements InterfaceChasquiparser{
 		LCole=lcole;
 		atributometadatotaxonUni = new CompleteElementType(name, father);
 		
-		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(browseable),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		VistaOV.getValues().add(Valor);
-		VistaOV.getValues().add(Valor2);
-		VistaOV.getValues().add(Valor3);
+		atributometadatotaxonUni.getShows().add(Valor);
+		atributometadatotaxonUni.getShows().add(Valor2);
+		atributometadatotaxonUni.getShows().add(Valor3);
 		
-		atributometadatotaxonUni.getShows().add(VistaOV);
 		this.idov=idov;
 		hermanos=new HashMap<String, ArrayList<ElementType_Taxonomias_Taxonomia_Nodo>>();
 

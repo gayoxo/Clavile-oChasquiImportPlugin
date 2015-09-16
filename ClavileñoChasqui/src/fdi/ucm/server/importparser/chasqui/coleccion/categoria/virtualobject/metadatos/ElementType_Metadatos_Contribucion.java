@@ -15,7 +15,6 @@ import fdi.ucm.server.modelComplete.collection.document.CompleteTextElement;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteIterator;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteStructure;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
@@ -52,16 +51,15 @@ public class ElementType_Metadatos_Contribucion implements InterfaceChasquiparse
 		Father = (CompleteIterator) father;
 		atributosMetadatosContribucion=new CompleteElementType(name, Father);
 		
-		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(browseable),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		VistaOV.getValues().add(Valor);
-		VistaOV.getValues().add(Valor2);
-		VistaOV.getValues().add(Valor3);
-		atributosMetadatosContribucion.getShows().add(VistaOV);
+		atributosMetadatosContribucion.getShows().add(Valor);
+		atributosMetadatosContribucion.getShows().add(Valor2);
+		atributosMetadatosContribucion.getShows().add(Valor3);
 	}
 
 	
@@ -81,21 +79,20 @@ public class ElementType_Metadatos_Contribucion implements InterfaceChasquiparse
 			AMFecha=new CompleteTextElementType("Fecha", atributosMetadatosContribucion);
 			atributosMetadatosContribucion.getSons().add(AMFecha);
 			
-			CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+			String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 			
 			CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 			CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
 			CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 			
-			VistaOV.getValues().add(Valor);
-			VistaOV.getValues().add(Valor2);
-			VistaOV.getValues().add(Valor3);
-			AMFecha.getShows().add(VistaOV);
+			AMFecha.getShows().add(Valor);
+			AMFecha.getShows().add(Valor2);
+			AMFecha.getShows().add(Valor3);
 			
-			CompleteOperationalView VistaMetaType=new CompleteOperationalView(NameConstantsChasqui.METATYPE);
+			String VistaMetaType=new String(NameConstantsChasqui.METATYPE);
 			CompleteOperationalValueType MetaType=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.DATE,VistaMetaType);
-			VistaMetaType.getValues().add(MetaType);
-			AMFecha.getShows().add(VistaMetaType);
+			AMFecha.getShows().add(MetaType);
+
 			
 		}
 		}

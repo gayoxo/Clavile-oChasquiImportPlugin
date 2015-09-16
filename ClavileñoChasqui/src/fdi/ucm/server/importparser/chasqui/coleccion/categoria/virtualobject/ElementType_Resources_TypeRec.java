@@ -13,7 +13,6 @@ import fdi.ucm.server.importparser.chasqui.StaticFunctionsChasqui;
 import fdi.ucm.server.importparser.chasqui.InterfaceChasquiparser;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteLinkElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 /**
@@ -34,10 +33,10 @@ public class ElementType_Resources_TypeRec implements InterfaceChasquiparser{
 		LCole=lcole;
 		atributostypes=new CompleteTextElementType(typeFile, attributo);
 		
-		CompleteOperationalView VistaMetaType=new CompleteOperationalView(NameConstantsChasqui.METATYPE);
+		String VistaMetaType=new String(NameConstantsChasqui.METATYPE);
 		CompleteOperationalValueType MetaType=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.CONTROLED,VistaMetaType);
-		VistaMetaType.getValues().add(MetaType);
-		atributostypes.getShows().add(VistaMetaType);
+		atributostypes.getShows().add(MetaType);
+
 		
 		Vocabulario= new ArrayList<String>();
 		LCole.getCollection().getVocabularios().put(atributostypes, Vocabulario);

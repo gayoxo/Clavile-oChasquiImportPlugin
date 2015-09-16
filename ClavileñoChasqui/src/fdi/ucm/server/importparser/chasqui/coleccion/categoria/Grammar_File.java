@@ -17,7 +17,6 @@ import fdi.ucm.server.modelComplete.collection.document.CompleteResourceElementF
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteGrammar;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteLinkElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteResourceElementType;
 
 /**
@@ -38,24 +37,23 @@ public class Grammar_File implements InterfaceChasquiparser{
 		LCole=lcole;
 		{
 			Attributo = new CompleteGrammar(NameConstantsChasqui.FILENAME,NameConstantsChasqui.FILENAME,Padre);
-			CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+			String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 			
 			CompleteOperationalValueType Valor = new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 			CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
 			CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 			
-			VistaOV.getValues().add(Valor);
-			VistaOV.getValues().add(Valor2);
-			VistaOV.getValues().add(Valor3);
+			Attributo.getViews().add(Valor);
+			Attributo.getViews().add(Valor2);
+			Attributo.getViews().add(Valor3);
 			
-			CompleteOperationalView VistaOVMeta=new CompleteOperationalView(NameConstantsChasqui.META);
+			String VistaOVMeta=new String(NameConstantsChasqui.META);
 			
 			CompleteOperationalValueType ValorMeta=new CompleteOperationalValueType(NameConstantsChasqui.TYPE,NameConstantsChasqui.FILE,VistaOVMeta);
 
-			VistaOVMeta.getValues().add(ValorMeta);
+			Attributo.getViews().add(ValorMeta);
 			
-			Attributo.getViews().add(VistaOVMeta);
-			Attributo.getViews().add(VistaOV);
+
 		}
 
 
@@ -63,48 +61,43 @@ public class Grammar_File implements InterfaceChasquiparser{
 			IdovOwner = new CompleteLinkElementType(NameConstantsChasqui.IDOV_OWNERNAME, Attributo);
 			Attributo.getSons().add(IdovOwner);
 			
-			CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+			String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 			
 			CompleteOperationalValueType Valor = new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 			CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
 			CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 			
-			VistaOV.getValues().add(Valor);
-			VistaOV.getValues().add(Valor2);
-			VistaOV.getValues().add(Valor3);
+			IdovOwner.getShows().add(Valor);
+			IdovOwner.getShows().add(Valor2);
+			IdovOwner.getShows().add(Valor3);
 			
-			CompleteOperationalView VistaOVMeta=new CompleteOperationalView(NameConstantsChasqui.META);
+			String VistaOVMeta=new String(NameConstantsChasqui.META);
 			
 			CompleteOperationalValueType ValorMeta=new CompleteOperationalValueType(NameConstantsChasqui.TYPE,NameConstantsChasqui.IDOV_OWNER,VistaOVMeta);
 
-			VistaOVMeta.getValues().add(ValorMeta);
+			IdovOwner.getShows().add(ValorMeta);
 			
-			IdovOwner.getShows().add(VistaOVMeta);
-			
-			IdovOwner.getShows().add(VistaOV);
 		}
 		{
 			FireRef = new CompleteResourceElementType(NameConstantsChasqui.FILENAME, Attributo);
 			Attributo.getSons().add(FireRef);
 			
-			CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+			String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 			
 			CompleteOperationalValueType Valor = new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 			CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(false),VistaOV);
 			CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 			
-			VistaOV.getValues().add(Valor);
-			VistaOV.getValues().add(Valor2);
-			VistaOV.getValues().add(Valor3);
+			FireRef.getShows().add(Valor);
+			FireRef.getShows().add(Valor2);
+			FireRef.getShows().add(Valor3);
 			
-			CompleteOperationalView VistaOVMeta=new CompleteOperationalView(NameConstantsChasqui.META);
+			String VistaOVMeta=new String(NameConstantsChasqui.META);
 			
 			CompleteOperationalValueType ValorMeta=new CompleteOperationalValueType(NameConstantsChasqui.TYPE,NameConstantsChasqui.FILERESOURCE,VistaOVMeta);
 
-			VistaOVMeta.getValues().add(ValorMeta);
+			FireRef.getShows().add(ValorMeta);
 			
-			FireRef.getShows().add(VistaOVMeta);
-			FireRef.getShows().add(VistaOV);
 		}
 	}
 

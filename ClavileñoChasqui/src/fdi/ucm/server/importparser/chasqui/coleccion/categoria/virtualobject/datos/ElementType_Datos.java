@@ -11,7 +11,6 @@ import fdi.ucm.server.importparser.chasqui.coleccion.categoria.virtualobject.dat
 import fdi.ucm.server.importparser.chasqui.coleccion.categoria.virtualobject.datos.texto.ElementType_Texto;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 /**
@@ -37,17 +36,16 @@ public enum Tabla {ATRIBUTOS_NUMERICOS,ATRIBUTOS_TEXTO};
 		LCole=lcole;
 		atributonumericotexto=new CompleteElementType(name, father);
 		
-		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
+		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(browseable),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		VistaOV.getValues().add(Valor);
-		VistaOV.getValues().add(Valor2);
-		VistaOV.getValues().add(Valor3);
+		atributonumericotexto.getShows().add(Valor);
+		atributonumericotexto.getShows().add(Valor2);
+		atributonumericotexto.getShows().add(Valor3);
 		
-		atributonumericotexto.getShows().add(VistaOV);
 	}
 
 	/**

@@ -179,7 +179,7 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 					procesados.put(voc, vocaInt);
 					I=vocaInt;
 					vocaInt++;
-					CompleteDocuments nuevo= new CompleteDocuments(chasqui, Vocabulary, I.toString(), "");
+					CompleteDocuments nuevo= new CompleteDocuments(chasqui, I.toString(), "");
 					nuevo.getDescription().add(new CompleteTextElement(Number, I.toString()));
 					for (int j = 0; j < voc.size(); j++) {		
 						CompleteTextElement T=new CompleteTextElement(Values, voc.get(j));

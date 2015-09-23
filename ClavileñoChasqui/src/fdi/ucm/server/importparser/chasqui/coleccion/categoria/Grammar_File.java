@@ -138,7 +138,7 @@ public class Grammar_File implements InterfaceChasquiparser{
 						String Path2 = Idov+"/"+Nombre.toLowerCase();
 						CompleteFile EFV=new CompleteFile(Path,LCole.getCollection().getChasquiCollection());
 							
-						CompleteDocuments FileConst= new CompleteDocuments(LCole.getCollection().getChasquiCollection(),Attributo,"",Path);
+						CompleteDocuments FileConst= new CompleteDocuments(LCole.getCollection().getChasquiCollection(),"",Path);
 						
 						if (!Descripcion.isEmpty())
 							FileConst.setDescriptionText(Descripcion);

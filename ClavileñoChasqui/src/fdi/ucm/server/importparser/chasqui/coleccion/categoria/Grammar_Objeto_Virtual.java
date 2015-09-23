@@ -127,7 +127,7 @@ private void process_idovs() {
 					{
 					int Idov=Integer.parseInt(Dato);
 					CompleteCollection C=LCole.getCollection().getChasquiCollection();
-					CompleteDocuments sectionValue = new CompleteDocuments(C,MetaAtt,"","");
+					CompleteDocuments sectionValue = new CompleteDocuments(C,"","");
 					C.getEstructuras().add(sectionValue);
 					ObjetoVirtual.put(Idov, sectionValue);
 					}

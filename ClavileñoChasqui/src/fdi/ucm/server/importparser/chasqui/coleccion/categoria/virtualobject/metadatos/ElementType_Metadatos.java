@@ -9,10 +9,9 @@ import fdi.ucm.server.importparser.chasqui.NameConstantsChasqui;
 import fdi.ucm.server.importparser.chasqui.InterfaceChasquiparser;
 import fdi.ucm.server.importparser.chasqui.coleccion.categoria.virtualobject.metadatos.catalogo.ElementType_Catalogos;
 import fdi.ucm.server.importparser.chasqui.coleccion.categoria.virtualobject.metadatos.taxonomia.ElementType_Taxonomias;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteGrammar;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteIterator;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteStructure;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 
@@ -25,7 +24,7 @@ public class ElementType_Metadatos implements InterfaceChasquiparser{
 
 
 
-	private CompleteElementType atributometadato;
+	private CompleteStructure atributometadato;
 	private LoadCollectionChasqui LCole;
 
 	/**
@@ -37,7 +36,7 @@ public class ElementType_Metadatos implements InterfaceChasquiparser{
 	public ElementType_Metadatos(String name, boolean browseable,
 			CompleteGrammar father,LoadCollectionChasqui lcole) {
 		LCole=lcole;
-		atributometadato=new CompleteElementType(name,father);
+		atributometadato=new CompleteStructure(name,father);
 		
 		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
@@ -235,7 +234,7 @@ public class ElementType_Metadatos implements InterfaceChasquiparser{
 	 * 
 	 * @return ExtendMeta
 	 */
-	public CompleteElementType getMeta() {
+	public CompleteStructure getMeta() {
 		return atributometadato;
 	}
 

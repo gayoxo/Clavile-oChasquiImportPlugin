@@ -9,8 +9,9 @@ import fdi.ucm.server.importparser.chasqui.NameConstantsChasqui;
 import fdi.ucm.server.importparser.chasqui.InterfaceChasquiparser;
 import fdi.ucm.server.importparser.chasqui.coleccion.categoria.virtualobject.datos.numericos.ElementType_Numeric;
 import fdi.ucm.server.importparser.chasqui.coleccion.categoria.virtualobject.datos.texto.ElementType_Texto;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteGrammar;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteStructure;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 /**
@@ -22,7 +23,7 @@ public class ElementType_Datos implements InterfaceChasquiparser{
 
 public enum Tabla {ATRIBUTOS_NUMERICOS,ATRIBUTOS_TEXTO};
 
-	private CompleteElementType atributonumericotexto;
+	private CompleteStructure atributonumericotexto;
 	private LoadCollectionChasqui LCole;
 
 	/**
@@ -32,9 +33,9 @@ public enum Tabla {ATRIBUTOS_NUMERICOS,ATRIBUTOS_TEXTO};
 	 * @param father padre del meta.
 	 */
 	public ElementType_Datos(String name, boolean browseable,
-			CompleteElementType father,LoadCollectionChasqui lcole) {
+			CompleteStructure father,LoadCollectionChasqui lcole, CompleteGrammar CG) {
 		LCole=lcole;
-		atributonumericotexto=new CompleteElementType(name, father);
+		atributonumericotexto=new CompleteStructure(name, father,CG);
 		
 		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
@@ -52,7 +53,7 @@ public enum Tabla {ATRIBUTOS_NUMERICOS,ATRIBUTOS_TEXTO};
 	 * Funcion de copia del paramero por referencia.
 	 * @param atributonumericotexto nuevo parametro.
 	 */
-	public ElementType_Datos(CompleteElementType atributonumericotexto,LoadCollectionChasqui lcole) {
+	public ElementType_Datos(CompleteStructure atributonumericotexto,LoadCollectionChasqui lcole) {
 		this.atributonumericotexto=atributonumericotexto;
 		LCole=lcole;
 	}
@@ -159,7 +160,7 @@ public enum Tabla {ATRIBUTOS_NUMERICOS,ATRIBUTOS_TEXTO};
 	 * 
 	 * @return the atributonumericotexto
 	 */
-	public CompleteElementType getMeta() {
+	public CompleteStructure getMeta() {
 		return atributonumericotexto;
 	}
 

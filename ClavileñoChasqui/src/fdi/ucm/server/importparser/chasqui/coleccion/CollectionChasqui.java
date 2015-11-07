@@ -3,6 +3,7 @@ package fdi.ucm.server.importparser.chasqui.coleccion;
 import fdi.ucm.server.importparser.chasqui.LoadCollectionChasqui;
 import fdi.ucm.server.importparser.chasqui.NameConstantsChasqui;
 import fdi.ucm.server.importparser.chasqui.InterfaceChasquiparser;
+import fdi.ucm.server.importparser.chasqui.StaticFunctionsChasqui;
 import fdi.ucm.server.importparser.chasqui.coleccion.categoria.Grammar_File;
 import fdi.ucm.server.importparser.chasqui.coleccion.categoria.Grammar_Objeto_Virtual;
 import fdi.ucm.server.importparser.chasqui.coleccion.categoria.virtualobject.datos.ElementType_Datos;
@@ -17,6 +18,7 @@ import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteGrammar;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteIterator;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteStructure;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 import java.sql.ResultSet;
@@ -45,7 +47,7 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 	private HashMap<String, CompleteDocuments> FilesC;
 	private Grammar_Objeto_Virtual ObjetoDigitalMeta;
 	private LoadCollectionChasqui Lcole;
-	private static HashMap<CompleteElementType, ArrayList<String>> Vocabularios;
+	private static HashMap<CompleteStructure, ArrayList<String>> Vocabularios;
 	
 	
 	
@@ -59,7 +61,7 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 		CompleteFiles=new HashMap<String, CompleteFile>();
 		ObjetoVirtual=new HashMap<Integer, CompleteDocuments>();
 		FilesC=new HashMap<String, CompleteDocuments>();
-		Vocabularios=new HashMap<CompleteElementType, ArrayList<String>>();
+		Vocabularios=new HashMap<CompleteStructure, ArrayList<String>>();
 		Lcole=lCole;
 	}
 	
@@ -109,8 +111,8 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 		Vocabulary.getSons().add(Number);
 		
 		
-		CompleteIterator IteraValor=new CompleteIterator(Vocabulary);
-		Vocabulary.getSons().add(IteraValor);
+//		CompleteIterator IteraValor=new CompleteIterator(Vocabulary);
+//		Vocabulary.getSons().add(IteraValor);
 		
 		
 		
@@ -137,8 +139,9 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 		}
 		
 		
-		CompleteTextElementType Values=new CompleteTextElementType(NameConstantsChasqui.TERM, IteraValor);
-		IteraValor.getSons().add(Values);
+		CompleteTextElementType Values=new CompleteTextElementType(NameConstantsChasqui.TERM, Vocabulary);
+		Values.setMultivalued(true);
+		Vocabulary.getSons().add(Values);
 		
 		{
 		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
@@ -166,8 +169,8 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 
 			HashMap<ArrayList<String>, Integer> procesados=new HashMap<ArrayList<String>, Integer>();
 			int vocaInt=0;
-			for (Entry<CompleteElementType, ArrayList<String>> iterable_element : Vocabularios.entrySet()) {
-				CompleteElementType element = iterable_element.getKey();
+			for (Entry<CompleteStructure, ArrayList<String>> iterable_element : Vocabularios.entrySet()) {
+				CompleteStructure element = iterable_element.getKey();
 				ArrayList<String> voc = iterable_element.getValue();
 				
 				
@@ -181,9 +184,13 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 					vocaInt++;
 					CompleteDocuments nuevo= new CompleteDocuments(chasqui, I.toString(), "");
 					nuevo.getDescription().add(new CompleteTextElement(Number, I.toString()));
+					CompleteStructure ActualStruct = Values;
 					for (int j = 0; j < voc.size(); j++) {		
-						CompleteTextElement T=new CompleteTextElement(Values, voc.get(j));
-						T.getAmbitos().add(j);
+						if (ActualStruct==null)
+							ActualStruct=StaticFunctionsChasqui.clone(Values);
+						
+						CompleteTextElement T=new CompleteTextElement((CompleteTextElementType)ActualStruct, voc.get(j));
+						ActualStruct=ActualStruct.getBrotherSon();
 						nuevo.getDescription().add(T);
 					}
 					chasqui.getEstructuras().add(nuevo);
@@ -232,7 +239,7 @@ private void process_Atributos() {
 	 * Funcion que procesa los datos.
 	 */
 	private void process_atributos_datos() {
-		CompleteElementType AtributosMeta=new CompleteElementType(NameConstantsChasqui.DATOSNAME,ObjetoDigitalMeta.getMeta());
+		CompleteStructure AtributosMeta=new CompleteStructure(NameConstantsChasqui.DATOSNAME,ObjetoDigitalMeta.getMeta());
 		
 		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		
@@ -287,7 +294,7 @@ private void process_Atributos() {
 	 * Funcion que procesa los atributos de texto.
 	 * @param atributosMeta Meta padre donde se introducen
 	 */
-	private void process_atributos_texto(CompleteElementType atributosMeta) {
+	private void process_atributos_texto(CompleteStructure atributosMeta) {
 		try {
 			ResultSet rs=Lcole.getSQL().RunQuerrySELECT("SELECT distinct categoria FROM atributos_texto ORDER BY categoria;");
 			if (rs!=null) 
@@ -297,7 +304,7 @@ private void process_Atributos() {
 					String Dato=rs.getObject("categoria").toString();
 					if (Dato!=null&&!Dato.isEmpty())
 						{
-						ElementType_Datos ATCategoria=new ElementType_Datos(Dato,false,atributosMeta,Lcole);
+						ElementType_Datos ATCategoria=new ElementType_Datos(Dato,false,atributosMeta,Lcole,atributosMeta.getCollectionFather());
 						atributosMeta.getSons().add(ATCategoria.getMeta());
 				//		ElementType Salida=((ElementType) StaticFunctionsChasqui.addMeta(atributosMeta,ATCategoria.getMeta()));
 //						ATCategoria=new ElementType_Datos(Salida);
@@ -319,7 +326,7 @@ private void process_Atributos() {
 	 * Funcion de proceso de los atributos numericos.
 	 * @param atributosMeta padre donde se introducen los datos
 	 */
-	private void process_atributos_numericos(CompleteElementType atributosMeta) {
+	private void process_atributos_numericos(CompleteStructure atributosMeta) {
 		try {
 			ResultSet rs=Lcole.getSQL().RunQuerrySELECT("SELECT distinct categoria FROM atributos_numericos;");
 			if (rs!=null) 
@@ -329,7 +336,7 @@ private void process_Atributos() {
 					String Dato=rs.getObject("categoria").toString();
 					if (Dato!=null&&!Dato.isEmpty())
 						{
-						ElementType_Datos ANCategoria=new ElementType_Datos(Dato,false,atributosMeta,Lcole);
+						ElementType_Datos ANCategoria=new ElementType_Datos(Dato,false,atributosMeta,Lcole,atributosMeta.getCollectionFather());
 						atributosMeta.getSons().add(ANCategoria.getMeta());
 //						ElementType Salida=((ElementType) StaticFunctionsChasqui.addMeta(atributosMeta,ANCategoria.getMeta()));
 ////						if (Salida==ANCategoria.getExtendAttribute())
@@ -425,7 +432,7 @@ private void process_Atributos() {
 	/**
 	 * @return the vocabularios
 	 */
-	public HashMap<CompleteElementType, ArrayList<String>> getVocabularios() {
+	public HashMap<CompleteStructure, ArrayList<String>> getVocabularios() {
 		return Vocabularios;
 	}
 
@@ -433,7 +440,7 @@ private void process_Atributos() {
 	 * @param vocabularios the vocabularios to set
 	 */
 	public void setVocabularios(
-			HashMap<CompleteElementType, ArrayList<String>> vocabularios) {
+			HashMap<CompleteStructure, ArrayList<String>> vocabularios) {
 		Vocabularios = vocabularios;
 	}
 	

@@ -7,10 +7,11 @@ import fdi.ucm.server.modelComplete.collection.document.CompleteDocuments;
 import fdi.ucm.server.modelComplete.collection.document.CompleteElement;
 import fdi.ucm.server.modelComplete.collection.document.CompleteLinkElement;
 import fdi.ucm.server.modelComplete.collection.document.CompleteTextElement;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteStructure;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteLinkElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteResourceElementType;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteStructure;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
+
 
 /**
  * Clase que define la funcionalidad extra para chasqui mediante funciones staticas.
@@ -39,11 +40,11 @@ public class StaticFunctionsChasqui {
 	 * @param Nuevo elemento a añadir
 	 * @return el elemento nuevo si se añadio, el gemelo dentro del padre si existia previamente.
 	 */
-	public static CompleteElementType addMeta(CompleteElementType Padre, CompleteLinkElementType Nuevo) {
+	public static CompleteStructure addMeta(CompleteStructure Padre, CompleteLinkElementType Nuevo) {
 		for (CompleteStructure element : Padre.getSons()) {
-			if (element instanceof CompleteElementType)
-				if ((element instanceof CompleteLinkElementType)&&(((CompleteElementType) element).getName().equals(Nuevo.getName())))
-						return (CompleteElementType) element;
+			if (element instanceof CompleteStructure)
+				if ((element instanceof CompleteLinkElementType)&&(((CompleteStructure) element).getName().equals(Nuevo.getName())))
+						return (CompleteStructure) element;
 		}
 		Padre.getSons().add(Nuevo);
 		return Nuevo;
@@ -55,11 +56,11 @@ public class StaticFunctionsChasqui {
 	 * @param Nuevo elemento a añadir
 	 * @return el elemento nuevo si se añadio, el gemelo dentro del padre si existia previamente.
 	 */
-	public static CompleteElementType addMeta(CompleteElementType Padre, CompleteResourceElementType Nuevo) {
+	public static CompleteStructure addMeta(CompleteStructure Padre, CompleteResourceElementType Nuevo) {
 		for (CompleteStructure element : Padre.getSons()) {
-			if (element instanceof CompleteElementType)
-				if ((element instanceof CompleteResourceElementType)&&(((CompleteElementType) element).getName().equals(Nuevo.getName())))
-						return (CompleteElementType) element;
+			if (element instanceof CompleteStructure)
+				if ((element instanceof CompleteResourceElementType)&&(((CompleteStructure) element).getName().equals(Nuevo.getName())))
+						return (CompleteStructure) element;
 		}
 		Padre.getSons().add(Nuevo);
 		return Nuevo;
@@ -74,11 +75,11 @@ public class StaticFunctionsChasqui {
 	 * @param Nuevo elemento a añadir
 	 * @return el elemento nuevo si se añadio, el gemelo dentro del padre si existia previamente.
 	 */
-	public static CompleteElementType addMeta(CompleteElementType Padre, CompleteElementType Nuevo) {
+	public static CompleteStructure addMeta(CompleteStructure Padre, CompleteStructure Nuevo) {
 		for (CompleteStructure element : Padre.getSons()) {
-			if (element instanceof CompleteElementType)
-				if (((CompleteElementType) element).getName().equals(Nuevo.getName()))
-						return (CompleteElementType) element;
+			if (element instanceof CompleteStructure)
+				if (((CompleteStructure) element).getName().equals(Nuevo.getName()))
+						return (CompleteStructure) element;
 		}
 		Padre.getSons().add(Nuevo);
 		return Nuevo;
@@ -148,9 +149,9 @@ public class StaticFunctionsChasqui {
 	 * @return
 	 */
 	public static CompleteElement FindDescAtribAmbito(
-			ArrayList<CompleteElement> description, String typeFile, int Ambito) {
+			ArrayList<CompleteElement> description, String typeFile) {
 		for (CompleteElement completeElement : description) {
-			if(completeElement.getHastype().getName().equals(typeFile)&&completeElement.getAmbitos().get(completeElement.getAmbitos().size()-1).intValue()==Ambito)
+			if(completeElement.getHastype().getName().equals(typeFile))
 				return completeElement;
 		}
 		return null;
@@ -164,12 +165,44 @@ public class StaticFunctionsChasqui {
 	 * @return
 	 */
 	public static CompleteElement FindDescAtribAmbito(
-			ArrayList<CompleteElement> description, CompleteElementType attributo, int Ambito) {
+			ArrayList<CompleteElement> description, CompleteStructure attributo) {
 		for (CompleteElement completeElement : description) {
-			if(completeElement.getHastype()==attributo&&completeElement.getAmbitos().get(completeElement.getAmbitos().size()-1).intValue()==Ambito)
+			if(completeElement.getHastype()==attributo)
 				return completeElement;
 		}
 		return null;
+	}
+
+
+
+	public static CompleteTextElementType clone(CompleteTextElementType values) {
+		CompleteTextElementType nueva=new CompleteTextElementType(values.getName(), null, values.getCollectionFather());
+		CompleteStructure hermano = values;
+		while (hermano.getBrotherSon()!=null)
+			hermano=hermano.getBrotherSon();
+		hermano.setBrotherSon(nueva);
+		nueva.setBrotherFather(hermano);
+		for (CompleteStructure elemP : values.getSons()) {
+			cloneP(elemP,nueva);
+		}
+		return nueva;
+	}
+
+
+
+	private static void cloneP(CompleteStructure aclonar,
+			CompleteStructure padre) {
+		CompleteTextElementType nueva=new CompleteTextElementType(aclonar.getName(), padre, aclonar.getCollectionFather());
+		padre.getSons().add(nueva);
+		CompleteStructure primo = aclonar;
+		while (primo.getCousinSon()!=null)
+			primo=primo.getCousinSon();
+		primo.setCousinSon(nueva);
+		nueva.setCousinFather(primo);
+		for (CompleteStructure elemP2 : aclonar.getSons()) {
+			cloneP(elemP2,nueva);
+		}
+		
 	}
 
 

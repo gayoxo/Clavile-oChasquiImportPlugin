@@ -177,31 +177,45 @@ public class StaticFunctionsChasqui {
 
 	public static CompleteTextElementType clone(CompleteTextElementType values) {
 		CompleteTextElementType nueva=new CompleteTextElementType(values.getName(), null, values.getCollectionFather());
+		nueva.setMultivalued(values.isMultivalued());
+		nueva.setBrowseable(values.isBrowseable());
+		nueva.setClassOfIterator(values);
 		CompleteStructure hermano = values;
-		while (hermano.getBrotherSon()!=null)
-			hermano=hermano.getBrotherSon();
-		hermano.setBrotherSon(nueva);
-		nueva.setBrotherFather(hermano);
+		while (hermano.getBSon()!=null)
+			hermano=hermano.getBSon();
+		hermano.setBSon(nueva);
+		nueva.setBFather(hermano);
+		CompleteStructure ClaseadrePre=null;
 		for (CompleteStructure elemP : values.getSons()) {
-			cloneP(elemP,nueva);
+			if (ClaseadrePre!=null&&ClaseadrePre.getClassOfIterator()!=null&&ClaseadrePre!=elemP)
+				ClaseadrePre=null;
+			ClaseadrePre=cloneP(elemP,nueva,ClaseadrePre);
 		}
 		return nueva;
 	}
 
 
 
-	private static void cloneP(CompleteStructure aclonar,
-			CompleteStructure padre) {
+	private static CompleteStructure cloneP(CompleteStructure aclonar,
+			CompleteStructure padre, CompleteStructure clasePadreHermanos) {
 		CompleteTextElementType nueva=new CompleteTextElementType(aclonar.getName(), padre, aclonar.getCollectionFather());
+		nueva.setMultivalued(nueva.isMultivalued());
+		nueva.setBrowseable(nueva.isBrowseable());
+		nueva.setClassOfIterator(clasePadreHermanos);
 		padre.getSons().add(nueva);
-		CompleteStructure primo = aclonar;
-		while (primo.getCousinSon()!=null)
-			primo=primo.getCousinSon();
-		primo.setCousinSon(nueva);
-		nueva.setCousinFather(primo);
+		CompleteStructure hermano = clasePadreHermanos;
+		while (hermano.getBSon()!=null)
+			hermano=hermano.getBSon();
+		hermano.setBSon(nueva);
+		nueva.setBFather(hermano);
+		CompleteStructure ClaseadrePre=null;
 		for (CompleteStructure elemP2 : aclonar.getSons()) {
-			cloneP(elemP2,nueva);
+			if (ClaseadrePre!=null&&ClaseadrePre.getClassOfIterator()!=null&&ClaseadrePre!=elemP2)
+				ClaseadrePre=null;
+			cloneP(elemP2,nueva,ClaseadrePre);
 		}
+		
+		return nueva;
 		
 	}
 

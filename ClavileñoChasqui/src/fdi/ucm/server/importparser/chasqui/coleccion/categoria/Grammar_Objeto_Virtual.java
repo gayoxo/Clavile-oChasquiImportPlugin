@@ -16,7 +16,6 @@ import fdi.ucm.server.modelComplete.collection.document.CompleteDocuments;
 import fdi.ucm.server.modelComplete.collection.document.CompleteFile;
 import fdi.ucm.server.modelComplete.collection.document.CompleteTextElement;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteGrammar;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteIterator;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
 
 /**
@@ -79,13 +78,14 @@ public class Grammar_Objeto_Virtual implements InterfaceChasquiparser{
 		Idov.ProcessAttributes();
 		MetaAtt.getSons().add(Idov.getAttributo());
 		
-	
-		CompleteIterator MultivaluedFile = new CompleteIterator(MetaAtt);
-		MetaAtt.getSons().add(MultivaluedFile);
-		
-		 EF = new ElementType_Resources(MultivaluedFile,LCole);
+//		CompleteIterator MultivaluedFile = new CompleteIterator(MetaAtt);
+//		MetaAtt.getSons().add(MultivaluedFile);
+//		EF = new ElementType_Resources(MultivaluedFile,LCole);
+		 
+		EF = new ElementType_Resources(MetaAtt,LCole);
+		 EF.getAttributo().setMultivalued(true);
 		EF.ProcessAttributes();
-		MultivaluedFile.getSons().add(EF.getAttributo());
+		MetaAtt.getSons().add(EF.getAttributo());
 		
 		
 		

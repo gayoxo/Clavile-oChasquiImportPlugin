@@ -11,7 +11,7 @@ import fdi.ucm.server.modelComplete.collection.document.CompleteDocuments;
 import fdi.ucm.server.modelComplete.collection.document.CompleteLinkElement;
 import fdi.ucm.server.modelComplete.collection.document.CompleteOperationalValue;
 import fdi.ucm.server.modelComplete.collection.document.CompleteTextElement;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteIterator;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteGrammar;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteLinkElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteStructure;
@@ -24,7 +24,7 @@ import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
  */
 public class ElementType_Resources implements InterfaceChasquiparser {
 	
-	private CompleteIterator metaPadre;
+	private CompleteGrammar metaPadre;
 	private CompleteLinkElementType Attributo;
 	private CompleteTextElementType Descripcion;
 	private CompleteTextElementType DisplayNeme;
@@ -42,9 +42,9 @@ public class ElementType_Resources implements InterfaceChasquiparser {
 
 
 
-	public ElementType_Resources(CompleteStructure meta,LoadCollectionChasqui lcole) {
+	public ElementType_Resources(CompleteGrammar meta,LoadCollectionChasqui lcole) {
 		LCole=lcole;
-		metaPadre=(CompleteIterator) meta;
+		metaPadre=meta;
 	}
 
 

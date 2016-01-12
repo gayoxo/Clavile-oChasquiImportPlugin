@@ -14,9 +14,7 @@ import fdi.ucm.server.modelComplete.collection.CompleteCollection;
 import fdi.ucm.server.modelComplete.collection.document.CompleteDocuments;
 import fdi.ucm.server.modelComplete.collection.document.CompleteFile;
 import fdi.ucm.server.modelComplete.collection.document.CompleteTextElement;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteGrammar;
-import fdi.ucm.server.modelComplete.collection.grammar.CompleteIterator;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteStructure;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
@@ -190,7 +188,7 @@ public class CollectionChasqui implements InterfaceChasquiparser{
 							ActualStruct=StaticFunctionsChasqui.clone(Values);
 						
 						CompleteTextElement T=new CompleteTextElement((CompleteTextElementType)ActualStruct, voc.get(j));
-						ActualStruct=ActualStruct.getBrotherSon();
+						ActualStruct=ActualStruct.getBSon();
 						nuevo.getDescription().add(T);
 					}
 					chasqui.getEstructuras().add(nuevo);

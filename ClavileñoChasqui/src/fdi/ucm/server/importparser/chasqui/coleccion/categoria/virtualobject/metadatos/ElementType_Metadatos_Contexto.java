@@ -12,6 +12,7 @@ import fdi.ucm.server.modelComplete.collection.document.CompleteDocuments;
 import fdi.ucm.server.modelComplete.collection.document.CompleteTextElement;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteIterator;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteStructure;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
@@ -41,21 +42,23 @@ public class ElementType_Metadatos_Contexto implements InterfaceChasquiparser {
 		Father = (CompleteIterator) father;
 		atributosmetadatoscontexto=new CompleteTextElementType(name, Father);
 
-		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
+		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(browseable),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
 		
-		atributosmetadatoscontexto.getShows().add(Valor);
-		atributosmetadatoscontexto.getShows().add(Valor2);
-		atributosmetadatoscontexto.getShows().add(Valor3);
+		VistaOV.getValues().add(Valor);
+		VistaOV.getValues().add(Valor2);
+		VistaOV.getValues().add(Valor3);
 		
-		String VistaMetaType=new String(NameConstantsChasqui.METATYPE);
+		CompleteOperationalView VistaMetaType=new CompleteOperationalView(NameConstantsChasqui.METATYPE);
 		CompleteOperationalValueType MetaType=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.CONTROLED,VistaMetaType);
-		atributosmetadatoscontexto.getShows().add(MetaType);
-
+		VistaMetaType.getValues().add(MetaType);
+		atributosmetadatoscontexto.getShows().add(VistaMetaType);
+		
+		atributosmetadatoscontexto.getShows().add(VistaOV);
 		
 		Vocabulario= new ArrayList<String>();
 		LCole.getCollection().getVocabularios().put(atributosmetadatoscontexto, Vocabulario);

@@ -13,6 +13,7 @@ import fdi.ucm.server.importparser.chasqui.StaticFunctionsChasqui;
 import fdi.ucm.server.importparser.chasqui.InterfaceChasquiparser;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteLinkElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 /**
@@ -33,21 +34,21 @@ public class ElementType_Resources_Type implements InterfaceChasquiparser{
 		LCole=lcole;
 		atributostypes=new CompleteTextElementType(typeFile, attributo);
 
-		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
+		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(false),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(b),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 
-		atributostypes.getShows().add(Valor);
-		atributostypes.getShows().add(Valor2);
-		atributostypes.getShows().add(Valor3);
+		VistaOV.getValues().add(Valor);
+		VistaOV.getValues().add(Valor2);
+		VistaOV.getValues().add(Valor3);
+		atributostypes.getShows().add(VistaOV);
 		
-		
-		String VistaMetaType=new String(NameConstantsChasqui.METATYPE);
+		CompleteOperationalView VistaMetaType=new CompleteOperationalView(NameConstantsChasqui.METATYPE);
 		CompleteOperationalValueType MetaType=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.CONTROLED,VistaMetaType);
-		atributostypes.getShows().add(MetaType);
-
+		VistaMetaType.getValues().add(MetaType);
+		atributostypes.getShows().add(VistaMetaType);
 		
 		Vocabulario= new ArrayList<String>();
 		LCole.getCollection().getVocabularios().put(atributostypes, Vocabulario);

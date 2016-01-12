@@ -9,6 +9,7 @@ import fdi.ucm.server.importparser.chasqui.NameConstantsChasqui;
 import fdi.ucm.server.importparser.chasqui.InterfaceChasquiparser;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 /**
@@ -33,15 +34,16 @@ public class ElementType_Catalogos implements InterfaceChasquiparser{
 		LCole=lcole;
 		catalogos=new CompleteElementType(name, father);
 		
-		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
+		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(browseable),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		catalogos.getShows().add(Valor);
-		catalogos.getShows().add(Valor2);
-		catalogos.getShows().add(Valor3);
+		VistaOV.getValues().add(Valor);
+		VistaOV.getValues().add(Valor2);
+		VistaOV.getValues().add(Valor3);
+		catalogos.getShows().add(VistaOV);
 	}
 
 	@Override

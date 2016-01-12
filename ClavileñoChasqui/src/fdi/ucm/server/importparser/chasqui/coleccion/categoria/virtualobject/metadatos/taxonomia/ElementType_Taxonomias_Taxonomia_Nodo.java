@@ -12,6 +12,7 @@ import fdi.ucm.server.modelComplete.collection.document.CompleteDocuments;
 import fdi.ucm.server.modelComplete.collection.document.CompleteTextElement;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 /**
@@ -34,7 +35,7 @@ public class ElementType_Taxonomias_Taxonomia_Nodo implements InterfaceChasquipa
 		LCole=lcole;
 		atributosmetadatosCategoria= new CompleteTextElementType(name, father);
 		
-		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
+		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(browseable),VistaOV);
@@ -42,18 +43,20 @@ public class ElementType_Taxonomias_Taxonomia_Nodo implements InterfaceChasquipa
 		
 	
 		
-		atributosmetadatosCategoria.getShows().add(Valor);
-		atributosmetadatosCategoria.getShows().add(Valor2);
-		atributosmetadatosCategoria.getShows().add(Valor3);
+		VistaOV.getValues().add(Valor);
+		VistaOV.getValues().add(Valor2);
+		VistaOV.getValues().add(Valor3);
+		atributosmetadatosCategoria.getShows().add(VistaOV);
 		this.num_ruta=num_ruta;
 		this.idov=idov;
 		Vocabulario=new ArrayList<String>();
 		
 		LCole.getCollection().getVocabularios().put(atributosmetadatosCategoria, Vocabulario);
 		
-		String VistaMetaType=new String(NameConstantsChasqui.METATYPE);
+		CompleteOperationalView VistaMetaType=new CompleteOperationalView(NameConstantsChasqui.METATYPE);
 		CompleteOperationalValueType MetaType=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.CONTROLED,VistaMetaType);
-		atributosmetadatosCategoria.getShows().add(MetaType);
+		VistaMetaType.getValues().add(MetaType);
+		atributosmetadatosCategoria.getShows().add(VistaMetaType);
 		
 	}
 

@@ -13,6 +13,7 @@ import fdi.ucm.server.modelComplete.collection.document.CompleteDocuments;
 import fdi.ucm.server.modelComplete.collection.document.CompleteTextElement;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteGrammar;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 /**
@@ -35,27 +36,31 @@ private LoadCollectionChasqui LCole;
 		LCole=lcole;
 		attributo=new CompleteTextElementType(name,father);
 		
-		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
+		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType VisibleAtt = new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(browseable),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(summary),VistaOV);
 		
-		attributo.getShows().add(VisibleAtt);
-		attributo.getShows().add(Valor2);
-		attributo.getShows().add(Valor3);
+		VistaOV.getValues().add(VisibleAtt);
+		VistaOV.getValues().add(Valor2);
+		VistaOV.getValues().add(Valor3);
 		
-		String VistaOVMeta=new String(NameConstantsChasqui.META);
+		CompleteOperationalView VistaOVMeta=new CompleteOperationalView(NameConstantsChasqui.META);
 		
 		CompleteOperationalValueType ValorMeta=new CompleteOperationalValueType(NameConstantsChasqui.TYPE,NameConstantsChasqui.IDOV,VistaOVMeta);
 		
-		attributo.getShows().add(ValorMeta);
+		VistaOVMeta.getValues().add(ValorMeta);
 		
-		String VistaMetaType=new String(NameConstantsChasqui.METATYPE);
+		CompleteOperationalView VistaMetaType=new CompleteOperationalView(NameConstantsChasqui.METATYPE);
 		CompleteOperationalValueType MetaType=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.TEXT,VistaMetaType);
-		attributo.getShows().add(MetaType);
+		VistaMetaType.getValues().add(MetaType);
 		
+		attributo.getShows().add(VistaOVMeta);
 		
+		attributo.getShows().add(VistaOV);
+		
+		attributo.getShows().add(VistaMetaType);
 	}
 
 	@Override

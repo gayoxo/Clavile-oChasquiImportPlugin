@@ -13,6 +13,7 @@ import fdi.ucm.server.modelComplete.collection.grammar.CompleteElementType;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteGrammar;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteIterator;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalValueType;
+import fdi.ucm.server.modelComplete.collection.grammar.CompleteOperationalView;
 import fdi.ucm.server.modelComplete.collection.grammar.CompleteTextElementType;
 
 
@@ -39,22 +40,27 @@ public class ElementType_Metadatos implements InterfaceChasquiparser{
 		LCole=lcole;
 		atributometadato=new CompleteElementType(name,father);
 		
-		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
+		CompleteOperationalView VistaOV=new CompleteOperationalView(NameConstantsChasqui.PRESNTACION);
 		
 		CompleteOperationalValueType Valor=new CompleteOperationalValueType(NameConstantsChasqui.VISIBLESHOWN,Boolean.toString(true),VistaOV);
 		CompleteOperationalValueType Valor2=new CompleteOperationalValueType(NameConstantsChasqui.BROWSERSHOWN,Boolean.toString(browseable),VistaOV);
 		CompleteOperationalValueType Valor3=new CompleteOperationalValueType(NameConstantsChasqui.SUMMARYSHOWN,Boolean.toString(false),VistaOV);
 		
-		atributometadato.getShows().add(Valor);
-		atributometadato.getShows().add(Valor2);
-		atributometadato.getShows().add(Valor3);
+		VistaOV.getValues().add(Valor);
+		VistaOV.getValues().add(Valor2);
+		VistaOV.getValues().add(Valor3);
 		
-		String VistaOVMeta=new String(NameConstantsChasqui.META);
+		CompleteOperationalView VistaOVMeta=new CompleteOperationalView(NameConstantsChasqui.META);
 		
 		CompleteOperationalValueType ValorMeta=new CompleteOperationalValueType(NameConstantsChasqui.TYPE,NameConstantsChasqui.METADATOS,VistaOVMeta);
 
-		atributometadato.getShows().add(ValorMeta);
+		VistaOVMeta.getValues().add(ValorMeta);
 		
+		atributometadato.getShows().add(VistaOVMeta);
+		
+		atributometadato.getShows().add(VistaOV);
+		
+
 		
 	}
 	

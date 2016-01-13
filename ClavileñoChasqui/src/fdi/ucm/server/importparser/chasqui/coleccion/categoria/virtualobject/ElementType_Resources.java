@@ -111,7 +111,7 @@ public class ElementType_Resources implements InterfaceChasquiparser {
 
 
 		{
-			OldSystemID = new CompleteTextElementType(NameConstantsChasqui.IDNAME, Attributo);
+			OldSystemID = new CompleteTextElementType(NameConstantsChasqui.IDNAME, Attributo,Attributo.getCollectionFather());
 			Attributo.getSons().add(OldSystemID);
 
 			String VistaOV=new String(NameConstantsChasqui.PRESNTACION);

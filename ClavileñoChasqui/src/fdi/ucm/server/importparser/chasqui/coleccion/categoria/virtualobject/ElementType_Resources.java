@@ -71,7 +71,7 @@ public class ElementType_Resources implements InterfaceChasquiparser {
 		}
 
 		{
-			Descripcion = new CompleteTextElementType(NameConstantsChasqui.DESCRIPTIONNAME,Attributo);
+			Descripcion = new CompleteTextElementType(NameConstantsChasqui.DESCRIPTIONNAME,Attributo,Attributo.getCollectionFather());
 			Attributo.getSons().add(Descripcion);
 			
 			String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
@@ -91,7 +91,7 @@ public class ElementType_Resources implements InterfaceChasquiparser {
 		}
 
 		{
-			DisplayNeme = new CompleteTextElementType(NameConstantsChasqui.DISPLAY_NAMENAME,Attributo);
+			DisplayNeme = new CompleteTextElementType(NameConstantsChasqui.DISPLAY_NAMENAME,Attributo,Attributo.getCollectionFather());
 			Attributo.getSons().add(DisplayNeme);
 			
 			String VistaOV=new String(NameConstantsChasqui.PRESNTACION);

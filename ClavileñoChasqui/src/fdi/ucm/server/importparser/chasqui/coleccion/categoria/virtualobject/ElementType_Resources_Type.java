@@ -31,7 +31,7 @@ public class ElementType_Resources_Type implements InterfaceChasquiparser{
 	public ElementType_Resources_Type(String typeFile,
 			boolean b, CompleteLinkElementType attributo,LoadCollectionChasqui lcole) {
 		LCole=lcole;
-		atributostypes=new CompleteTextElementType(typeFile, attributo);
+		atributostypes=new CompleteTextElementType(typeFile, attributo,attributo.getCollectionFather());
 
 		String VistaOV=new String(NameConstantsChasqui.PRESNTACION);
 		

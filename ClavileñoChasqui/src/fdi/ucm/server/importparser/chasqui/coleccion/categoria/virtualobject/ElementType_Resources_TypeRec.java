@@ -31,7 +31,7 @@ public class ElementType_Resources_TypeRec implements InterfaceChasquiparser{
 	public ElementType_Resources_TypeRec(String typeFile,
 			boolean b, CompleteLinkElementType attributo,LoadCollectionChasqui lcole) {
 		LCole=lcole;
-		atributostypes=new CompleteTextElementType(typeFile, attributo);
+		atributostypes=new CompleteTextElementType(typeFile, attributo,attributo.getCollectionFather());
 		
 		String VistaMetaType=new String(NameConstantsChasqui.METATYPE);
 		CompleteOperationalValueType MetaType=new CompleteOperationalValueType(NameConstantsChasqui.METATYPETYPE,NameConstantsChasqui.CONTROLED,VistaMetaType);

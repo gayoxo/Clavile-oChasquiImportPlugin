@@ -189,7 +189,7 @@ public class ElementType_Metadatos_Contribucion implements InterfaceChasquiparse
 								{
 								Date D= formatter.parse(contenido);
 								DateFormat df = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
-								String valueE=df.format(D.toString());
+								String valueE=df.format(D);
 								CompleteTextElement EMTV=new CompleteTextElement(padre.getAMFecha(), valueE);
 								EMTV.getAmbitos().add(context);
 								CompleteDocuments OV=LCole.getCollection().getObjetoVirtual().get(idovInt);
